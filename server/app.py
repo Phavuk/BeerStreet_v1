@@ -1,3 +1,5 @@
+import json
+
 import cross as cross
 import mysql.connector
 from flask import Flask,jsonify
@@ -21,10 +23,12 @@ def index():
     )
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM tbeers")
+    #myresult = mycursor.fetchall()
     myresult = mycursor.fetchall()
+    response = json.dumps(myresult)
     for x in myresult:
         print(x)
-    return jsonify(myresult)
+    return jsonify(response)
 
 @app.route('/order',methods=['GET','POST'])
 def indexx():
